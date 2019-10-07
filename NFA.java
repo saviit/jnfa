@@ -17,6 +17,7 @@ public class NFA {
         this.alphabet = alphabet;
         this.tr = tr;
         this.istate = istate;
+        this.F = new NFAStateSet();
         Iterator<NFAState> it = this.states.iterator();
         while (it.hasNext()) {
             NFAState s = it.next();
