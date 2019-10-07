@@ -1,24 +1,23 @@
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.SortedSet;
 
 /**
  * Minimal presentation of a non-deterministic finite automaton
  */
 public class NFA {
 
-    public SortedSet<NFAState> states;
+    public NFAStateSet states;
     public Alphabet alphabet;
     public TRel tr;
     public NFAState istate;
-    public SortedSet<NFAState> F;
+    public NFAStateSet F;
 
-    public NFA(SortedSet<NFAState> states, Alphabet alphabet, TRel tr, NFAState istate) {
+    public NFA(NFAStateSet states, Alphabet alphabet, TRel tr, NFAState istate) {
         this.states = states;
         this.alphabet = alphabet;
         this.tr = tr;
         this.istate = istate;
-        Iterator<NFAState> it = this.states.iterator;
+        Iterator<NFAState> it = this.states.iterator();
         while (it.hasNext()) {
             NFAState s = it.next();
             if (s.isEndState) this.F.add(s);
