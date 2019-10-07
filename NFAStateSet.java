@@ -42,11 +42,12 @@ public class NFAStateSet implements Iterable<NFAState> {
     }
 
     public boolean contains(String name) {
-        Iterator it = this.iterator();
+        Iterator<NFAState> it = this.iterator();
         while (it.hasNext()) {
             NFAState s = it.next();
             if (s.name.equals(name)) return true; 
         }
+        return false;
     }
 
     public Iterator<NFAState> iterator() {
@@ -60,15 +61,16 @@ public class NFAStateSet implements Iterable<NFAState> {
     }
 
     public NFAState get(String name) {
-        Iterator it = this.iterator();
+        Iterator<NFAState> it = this.iterator();
         while (it.hasNext()) {
             NFAState s = it.next();
             if (s.name.equals(name)) return s; 
         }
+        return null;
     }
 
     public int indexOf(NFAState s) {
-        if (contains(c)) return states.indexOf(s);
+        if (contains(s)) return states.indexOf(s);
         else throw new NoSuchElementException("Could not find element: " + s.name);
     }
 
@@ -82,5 +84,7 @@ public class NFAStateSet implements Iterable<NFAState> {
         }
     }
 
-
+    public int size() {
+        return states.size();
+    }
 }
