@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 /**
  * Simple collection class to store the alphabet for an NFA
  */
-public class Alphabet {
+public class Alphabet implements Iterable<Char> {
     private ArrayList<Char> c;
 
     public Alphabet() { c = new ArrayList<Char>(0); }
