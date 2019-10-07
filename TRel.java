@@ -1,11 +1,11 @@
-import java.util.SortedSet;
 import java.util.Iterator;
+import java.util.ArrayList;
 
 public class TRel {
-    public SortedSet<TFunc> tfuncs;
+    public ArrayList<TFunc> tfuncs;
     
     public TRel() {
-        tfuncs = new SortedSet<TFunc>() {};
+        tfuncs = new ArrayList<TFunc>();
     }
 
     public void add(TFunc tf) {
