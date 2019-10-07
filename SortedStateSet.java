@@ -4,7 +4,7 @@ import java.util.SortedSet;
 /**
  * SortedSet used to store NFA states.
  */
-public class SortedStateSet implements SortedSet {
+public abstract class SortedStateSet<E> implements SortedSet {
     
     public SortedStateSet() {
         super();
@@ -22,4 +22,6 @@ public class SortedStateSet implements SortedSet {
         }
         return null;
     }
+
+    
 }
