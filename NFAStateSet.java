@@ -72,6 +72,10 @@ public class NFAStateSet implements Iterable<NFAState> {
         else throw new NoSuchElementException("Could not find element: " + s.name);
     }
 
+    public boolean isEmpty() {
+        return states.size() == 0 ? true : false;
+    }
+
     public void remove(NFAState s) {
         if (contains(s)) {
             states.remove(s);
