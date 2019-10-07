@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 public class NFAStateSet implements Iterable<NFAState> {
     private ArrayList<NFAState> states;
 
-    public NFAStateSet() { c = new ArrayList<NFAState>(0); }
+    public NFAStateSet() { states = new ArrayList<NFAState>(0); }
     public NFAStateSet(NFAState[] s) {
         states = new ArrayList<NFAState>(s.length);
         addAll(s);
