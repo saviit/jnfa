@@ -10,7 +10,7 @@ public class NFAShortest {
             if (i == 10 || i == 15) {
                 states.add(new NFAState("" + i, true));
             } else {
-                states.add(new NFAState(""+i, false));
+                states.add(new NFAState("" + i, false));
             }
         }
         // create alphabet
