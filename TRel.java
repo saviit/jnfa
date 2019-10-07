@@ -13,12 +13,13 @@ public class TRel {
     }
 
     public NFAState yield(NFAState current, Character input) {
-        Iterator it = tfuncs.iterator();
+        Iterator<TFunc> it = tfuncs.iterator();
         while (it.hasNext()) {
             TFunc tf = it.next();
             if (tf.startState.equals(current) && tf.ch == input ) {
                 return tf.endState;
-            } else return null;
+            }
         }
+        return null;
     }
 }
