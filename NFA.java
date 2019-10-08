@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Minimal presentation of a non-deterministic finite automaton
+ * Minimal presentation of a (non-)deterministic finite automaton
  */
 public class NFA {
 
@@ -58,58 +58,17 @@ public class NFA {
         }
     }
 
-    // // returns the length of the shortest language accepted by this NFA
-    // public int shortest() {
-    //     // if initial state is also a final state NFA accepts an empty language
-    //     if (traverse("")) return 0;
-
-    //     Iterator it = alphabet.iterator();
-    //     AbstractSet<Character> csSet = new AbstractSet<Character>(); 
-    //     // gather valid arcs (from the initial state) into a temporary set
-    //     while (it.hasNext()) {
-    //         Character c = it.next();
-    //         NFAState ns = this.tr.yield(this.istate, c);
-    //         if (ns != null) {
-    //             if (ns.isEndState) return 1; // found a final state on the path
-    //             else csSet.add(c);
-    //         }
-    //     }
-
-    //     int k;
-    //     if (csSet.isEmpty()) return -1; // the NFA contains no valid paths
-    //     else k = 1;
-    //     ArrayList<String> paths = new ArrayList<String>();
-    //     for (Character initial : csSet) { 
-    //         paths.add(initial.toString()); 
-    //     }
-
-    //     // valid paths from initial state to final state are at most as long as the number of states in the NFA,
-    //     // excluding the initial state. for example, the longest valid path from initial state to a final in an 
-    //     // NFA with 5 states is  4.
-    //     while (k < states.size()) {
-    //         for (Character c : csSet) {
-    //             NFAState curr = tr.yield(istate, c);
-    //             for (Character a : alphabet) {
-    //                 NFAState nxt = tr.yield(curr, a);
-    //                 if (nxt != null) {
-    //                     if (nxt.isEndState) return k + 1; // found a final state on the path
-    //                     else {
-    //                         String path = c.toString(); // + a.toString();
-    //                         if (!paths.contains(path)) paths.add(path);
-    //                         else { paths.set(paths.indexOf(path), (path + a.toString())); }
-    //                     }
-    //                 }
-                    
-    //             }
-    //         }
-    //         k++;
-    //     }
-
-    // }
-
-
-    public int shortest2() {
-        if (this.F.isEmpty()) return -1; // there are no final states in the NFA
+    /**
+     * Finds the shortest string that the NFA accepts. 
+     * Currently does not account for one-letter-multiple-arcs situations,
+     * ie. the class behaves more like a DFA where this method is concerned.
+     * @return length of the shortest accepted string
+     */
+    public int shortest() {
+        if (this.F.isEmpty()) {
+            // System.out.println("Final state store is empty");
+            return -1; // there are no final states in the NFA
+        }
         if (istate.isEndState) return 0;
 
         ArrayList<String> paths = new ArrayList<String>();
@@ -120,11 +79,12 @@ public class NFA {
                 else paths.add(c.toString());
             }
         }
+        // System.out.println("Initial paths: " + paths);
         int k = 2;
-        ArrayList<String> tmp_paths = new ArrayList<String>();
         
         while (k < states.size()) {
-            for (String path : paths) {
+            for (int j = 0; j < paths.size(); j++) {
+                String path = paths.get(j);
                 NFAState curr = istate;
                 NFAState nxt;
                 for (int i = 0; i < path.length(); i++) {
@@ -133,15 +93,19 @@ public class NFA {
                 for (Character c : alphabet) {
                     nxt = tr.yield(curr, c);
                     if (nxt != null) {
-                        if (nxt.isEndState) return path.length() + 1;
-                        else tmp_paths.add(path + c.toString());
+                        if (nxt.isEndState) {
+                            // System.out.println("Shortest accepted language was: " + path + c.toString());
+                            return path.length() + 1;
+                        } else {
+                            String s = path + c.toString();
+                            paths.set(j, s);
+                        }
                     }
                 }
             }
-            paths = tmp_paths;
-            tmp_paths.clear();
             k++;
         }
-        return -1; // if we get here, there was no valid path
+        // System.out.println("No valid paths");
+        return -2; // if we get here, there was no valid path
     }
 }
