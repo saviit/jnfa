@@ -39,5 +39,20 @@ public class NFAShortest {
         
         int shortest = nfa.shortest();
         System.out.println(String.format("Shortest accepted language was %d characters long.", shortest));
+
+        String s1 = "auto";
+        String s2 = "rekka";
+        String s3 = "bcsat";
+        String s4 = "bcspo";
+        String s5 = "adspo";
+
+        System.out.println(String.format("%6s      %10s", "String", "Acceptable"));
+        System.out.println("----------------------");
+        System.out.println(String.format("%6s      %10s", s1, nfa.traverse(s1)));
+        System.out.println(String.format("%6s      %10s", s2, nfa.traverse(s2)));
+        System.out.println(String.format("%6s      %10s", s3, nfa.traverse(s3)));
+        System.out.println(String.format("%6s      %10s", s4, nfa.traverse(s4)));
+        System.out.println(String.format("%6s      %10s", s5, nfa.traverse(s5)));
+        
     }
 }
