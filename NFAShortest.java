@@ -37,7 +37,7 @@ public class NFAShortest {
         // initialize NFA
         NFA nfa = new NFA(states, alphabet, tr, states.get("1"));
         
-        int shortest = nfa.shortest2();
+        int shortest = nfa.shortest();
         System.out.println(String.format("Shortest accepted language was %d characters long.", shortest));
     }
 }
