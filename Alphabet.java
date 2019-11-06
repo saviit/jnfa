@@ -56,7 +56,7 @@ public class Alphabet implements Iterable<Character> {
     }
 
     public boolean contains(char c) {
-        return contains(new Character(c));
+        return contains(Character.valueOf(c));
     }
     public boolean contains(Character c) {
         return this.c.contains(c);
